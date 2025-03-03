@@ -1,0 +1,12 @@
+# Ignore compiled .class files
+*.class
+
+# Ignore Eclipse project files
+.project
+.classpath
+.settings/
+
+# Ignore directories
+node_modules/
+bin/
+target/
