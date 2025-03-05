@@ -1,5 +1,6 @@
 package com.codeq.employee;
 
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -71,5 +72,42 @@ public class Sort {
 
         System.out.println(e1.getName() + " : " + e1.getSal());
 
+        //
+        empList.stream()
+                .sorted(Comparator.comparingDouble(Employee::getSal)
+                        .reversed())
+                .skip(3)
+                .forEach(System.out::println);
+
+        empList.stream()
+                .collect(Collectors.groupingBy(Employee::getDept,
+                        Collectors.maxBy(Comparator.comparingDouble(Employee::getSal)
+                                .reversed())))
+                .entrySet()
+                .forEach(op -> {
+                    op.getValue()
+                            .ifPresent(p -> System.out.println(op.getKey() + " : " + p.getSal()));
+                });
+
+        int[] a = {1, 2, 3, 4, 5, 6};
+        long sum = Arrays.stream(a)
+                .boxed()
+                .collect(Collectors.summarizingInt(i -> i))
+                .getSum();
+        System.out.println(sum);
+
+        int su = Arrays.stream(a)
+                .sum();
+        System.out.println(su);
+
+        double av = 0;
+        Arrays.stream(a)
+                .average()
+                .ifPresent(System.out::println);
+        System.out.println(av);
+
+        long c = Arrays.stream(a)
+                .count();
+        System.out.println(c);
     }
 }
